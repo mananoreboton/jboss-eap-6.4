@@ -10,7 +10,8 @@ ENV ADMIN_USER="admin"                                                          
 ENV JBOSS_HOME="${JBOSS_USER_HOME}/${PRODUCT}"                                                     \
     ARCHIVES_BASE_URL="${DOWNLOAD_BASE_URL}/archives"                                              \
     PATCHES_BASE_URL="${DOWNLOAD_BASE_URL}/${JBOSS_EAP_PATCH}"
-ENV PATH="${JBOSS_HOME}/bin:/tmp:${PATH}"
+ENV PATH="${JBOSS_HOME}/bin:/tmp:${PATH}"                                                          \
+    JAVA_OPTS="-Djava.io.tmpdir=/tmp -Djava.net.preferIPv4Stack=true -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0"
 USER root
 RUN ( apk fix     --no-cache || echo "cannot fix."         )                                    && \
     ( apk upgrade --no-cache || echo "cannot upgrade."     )                                    && \
